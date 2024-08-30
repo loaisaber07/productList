@@ -1,0 +1,46 @@
+<form class="me-5" (ngSubmit)="addproduct()" #prdForm="ngForm">
+    <div class="form-group">
+      <label for="pName">Product Name</label>
+      <input #prodName="ngModel" type="text" class="form-control " id="pName" name="prdName"  [(ngModel)]="sumbitedProduct.name"
+       required pattern="[A-Z](3,)"
+      > 
+      <div [hidden]="prodName.valid || prodName.untouched ">
+    <small [hidden]="!prodName.errors?.['pattern']">
+        Name Is Valid
+    </small>
+    <small [hidden]="!prodName.errors?.['required']">
+        Name must be 3 letter at least
+    </small> 
+</div>
+    </div>
+    <div class="form-group">
+        <label for="pPrice">Product Price</label>
+        <input type="number" class="form-control" id="pPrice" name="prdPrice" [(ngModel)]="sumbitedProduct.price">
+      </div>
+      <div class="form-group">
+        <label for="pQuantity">Product Quantity</label>
+        <input type="text" class="form-control" id="pQuantity" name="prdQuantity" [(ngModel)]="sumbitedProduct.quantity">
+      </div> 
+      <div class="form-group">
+        <label for="pImage">Product ImageURL</label>
+        <input type="file" class="form-control" id="pImage" name="prdImage" [(ngModel)]="sumbitedProduct.imageURL" >
+      </div>
+        <div class="input-group mb-3" style="width: 100%;">
+        <div class="input-group-prepend" style="width: 20vw;">
+          <label class="input-group-text" for="pCategory">Product Category</label>
+        </div>
+
+        <select class="custom-select form-select" id="pCategory" name="Cat" style="width: 50vw;" 
+        [(ngModel)]="sumbitedProduct.categoryId">
+          <option selected value="0"  >Choose...</option>
+          <option *ngFor="let cat of categoryList" [value]="cat.id">{{cat.name}}</option>
+        </select>
+      </div>
+
+    <button type="submit" class="btn btn-primary" (click)="addproduct()" 
+    
+   [disabled]="prdForm.invalid">Submit</button>
+  </form>
+  <a>dsgfdsg</a>
+  <h1>{{sumbitedProduct| json}}</h1>
+  {{prodName.errors | json}}

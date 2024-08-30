@@ -1,0 +1,12 @@
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" [src]="currentProduct?.imageURL" alt="Card image cap" style="width: 286px;height: 180px;">
+    <div class="card-body">
+      <h5 class="card-title">{{currentProduct?.name}}</h5>
+      <p class="card-text">Price :{{currentProduct?.price}}</p>
+      <p class="card-text">Quantity:{{currentProduct?.quantity}}</p>
+      <hr>
+      <button [disabled]="currentId==allProductsByIDS[0]"  class="btn btn-primary m-1" (click)="PreviousProduct()" >Previous</button>
+      <a  class="btn btn-primary m-1" (click)="GOBack()">GoBack</a>
+      <button [disabled]="currentId==allProductsByIDS[allProductsByIDS.length-1]" class="btn btn-primary m-1"  (click)="NextProduct()">Next</button>
+    </div>
+  </div>

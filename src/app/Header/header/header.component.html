@@ -1,0 +1,27 @@
+ 
+    <div style="width: 100%;display: flex; justify-content: space-between; align-items: center;
+    background-color: rgba(0, 0, 0, 0.05);" >
+    <div style="display: flex; flex-direction: row;width: 80%; align-items: center;" >
+    <a class="navbar-brand"> 
+    <img src="../../../assets/cvPhoto.jpg" style="width: 60px; height: 60px; border-radius: 20px;"> 
+    </a> 
+    <a class="nav-link ms-3 me-3" aria-current="page" routerLink="/Home" routerLinkActive="active" >
+      Home</a>
+    <a class="nav-link  ms-3 me-3" aria-current="page" routerLink="/Products"routerLinkActive="active"
+    >Products</a>
+    <a class="nav-link  ms-3 me-3" aria-current="page" routerLink="/Order"routerLinkActive="active"
+    >Order</a>
+    <a class="nav-link  ms-3" aria-current="page" routerLink="/Login" [hidden]="isUserlogged"
+    >Login</a>
+    <a class="nav-link  ms-3" aria-current="page"  [hidden]="!isUserlogged">
+      logout</a>
+
+    </div> 
+    <div style="width: 30%;">
+    <form class="form-inline" style="display: flex; flex-direction: row;">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0 ms-1" type="submit">Search</button>
+    </form>
+</div> 
+</div>
+

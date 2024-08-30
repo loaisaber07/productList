@@ -1,0 +1,79 @@
+<form [formGroup]="userRegstiration" class="mb-10  col-6 " (ngSubmit)="sumbit()">
+    <div class="mb-3">
+        <label for="fName" class="form-label">First Name</label>
+        <input id="fName" type="text" class="form-control" formControlName="fullName" name="fname"
+            [class.is-valid]="fullName?.valid">
+    </div>
+    <div [hidden]=" fullName?.untouched">
+        <small *ngIf="fullName?.errors?.['required']">
+            this field is required
+        </small>
+
+    </div>
+    <div class="mb-3">
+        <label for="uEmail" class="form-label">Email</label>
+        <input id="uEmail" type="email" class="form-control" formControlName="email" name="useremail"
+            [class.is-valid]="getEmail?.valid" [class.is-invalid]="getEmail?.invalid &&getEmail?.touched">
+        <div [hidden]="getEmail?.valid || getEmail?.untouched">
+            <small *ngIf="getEmail?.errors?.['required']">
+                this field is required
+            </small>
+            <small *ngIf="getEmail?.errors?.['EmailNotValid']">
+                this field must include "&#64;"
+            </small>
+        </div>
+    </div>
+
+    <div formArrayName="phoneNO" class="mb-3" *ngFor="let phoneNo of phoneNumbers.controls;let i=index">
+        <label for="{{'uPhone' + i+1}}" class="form-label">Phone Number#{{i+1}}</label>
+        <input id="{{'uPhone' + i+1}}" type="number" class="form-control" [formControlName]="i" name="userphone">
+        <button class="btn btn-primary" (click)="addPhoneNo($event)">+</button>
+    </div>
+    <div formGroupName="address">
+        <div class="mb-3">
+            <label for="ucity" class="form-label">City</label>
+            <input id="ucity" type="text" class="form-control" formControlName="city" name="usercity">
+        </div>
+        <div class="mb-3">
+            <label for="upostCode" class="form-label">Post Code</label>
+            <input id="upostCode" type="text" class="form-control" formControlName="postCode" name="userpostcode">
+        </div>
+        <div class="mb-3">
+            <label for="ustreet" class="form-label">Street</label>
+            <input id="ustreet" type="text" class="form-control" formControlName="street" name="userstreet">
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="upassword" class="form-label">Password</label>
+        <input id="upassword" type="password" class="form-control" formControlName="password" name="userpassword">
+    </div>
+    <div class="mb-3">
+        <label for="uconfirmpassword" class="form-label">Confirm Password</label>
+        <input id="uconfirmpassword" type="password" class="form-control" formControlName="confirmPassword"
+            name="usercpassword">
+    </div>
+    <div class="alert alert-warning" *ngIf="(confirmPassword?.touched && password?.touched) && ( userRegstiration.errors?.['UnMatchingError'])" >
+        <small>unmatching</small>
+        <small></small>
+    </div>
+    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+        <input type="radio" class="btn-check" name="referral" formControlName="referral" id="btnradio1"
+            autocomplete="off" value="fb page" (change)="updateRefferialValidator()">
+        <label class="btn btn-outline-primary" for="btnradio1">Radio 1</label>
+
+        <input type="radio" class="btn-check" name="referral" formControlName="referral" id="btnradio2"
+            autocomplete="off" value="instgram" (change)="updateRefferialValidator()">
+        <label class="btn btn-outline-primary" for="btnradio2">Radio 2</label>
+
+        <input type="radio" class="btn-check" name="referral" formControlName="referral" id="btnradio3"
+            autocomplete="off" value="youtube" (change)="updateRefferialValidator()">
+        <label class="btn btn-outline-primary" for="btnradio3">Radio 3</label>
+    </div>
+    <div class="mb-3" *ngIf="userRegstiration.get('referral')?.value=='youtube' ">
+        <label for="other" class="form-label">Spicify</label>
+        <input id="other" type="text" class="form-control" formControlName="referralOther" name="refOther">
+    </div>
+    <button type="submit" class="btn btn-primary mt-3" [disabled]="userRegstiration.invalid">Sumbit</button>
+</form>
+
+<h1>{{userRegstiration.get('referralOther')?.errors|json}}</h1>

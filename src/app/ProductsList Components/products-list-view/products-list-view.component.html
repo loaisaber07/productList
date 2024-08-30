@@ -1,0 +1,30 @@
+<table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th> 
+        <th scope="col">Image</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Details</th>
+
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let prd of productList" > 
+      <td> {{prd.id}} </td>
+      <td> {{prd.name}} </td>
+      <td> 
+        <img [src]="prd.imageURL" style="width: 100px; height: 100px;">    
+    </td>
+      <td> {{prd.price}} </td>
+      <td> {{prd.quantity}} </td>
+      <td> 
+        <button type="button" class="btn btn-info" 
+        style="background-color: rgba(0, 0, 0, 0.05);border-color:  rgba(0, 0, 0, 0.05);"
+        [routerLink]="['/Products',prd.id]">Details</button>
+    
+    </td>
+</tr>
+    </tbody>
+  </table>
